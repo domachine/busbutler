@@ -9,14 +9,20 @@ exports.index = function(req, res){
 };
 
 exports.departureTimes = function(req, res){
-    var id = req.params.id;
+    var id = 'swu-' + req.params.id;
+    console.log(id);
     req.nano.get(id, function(err, doc){
         var now = Number(new Date());
-        if(doc.lastUpdate >== now-60)
+        console.log(doc.lastUpdate);
+        if(doc.lastUpdate <= now-60)
             res.end(JSON.stringify(doc.departures));
         else
-            core.update(doc, function(doc){
-                res.end(JSON.stringify(doc.departures));
-            }, nano);
+            core.update(doc, function(err, doc){
+                console.log('Update ...');
+                if (err)
+                    res.end(JSON.stringify(err));
+                else
+                    res.end(JSON.stringify(doc.departures));
+            }, req.nano);
     });
 };
