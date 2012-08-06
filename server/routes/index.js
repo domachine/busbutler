@@ -21,8 +21,7 @@ exports.departureTimes = function(req, res){
             return;
         }
         var now = Number(new Date());
-        console.log(doc.lastUpdate);
-        if(doc.lastUpdate <= now-60)
+        if(now - doc.lastUpdate <= 45 * 1000)
             res.end(JSON.stringify(doc.departures));
         else
             core.update(doc, function(err, doc){
