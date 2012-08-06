@@ -145,7 +145,7 @@ Ext.define('MyApp.view.Root', {
 
     onMylistSelect: function(dataview, record, options) {
         Ext.getCmp("root").fireEvent("changeList", Ext.getCmp("departureTimeList"));
-        Ext.getCmp("departureTimeList").fireEvent("updateList", record.get("value"));
+        Ext.getCmp("departureTimeList").fireEvent("updateList", record.get("id"));
     },
 
     onMybuttonTap: function(button, e, options) {
@@ -156,9 +156,7 @@ Ext.define('MyApp.view.Root', {
     onDepartureTimeListUpdateList: function(id) {
         //Ext.getCmp("departureTimeList").getStore().stationId = id;
         Ext.getCmp("departureTimeList").getStore().load({
-            params: {
-                id: id
-            }
+            url: '/departure-times/'+id
         });
     },
 

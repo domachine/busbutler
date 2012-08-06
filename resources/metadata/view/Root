@@ -128,7 +128,7 @@
                         "fn": "onMylistSelect",
                         "implHandler": [
                             "Ext.getCmp(\"root\").fireEvent(\"changeList\", Ext.getCmp(\"departureTimeList\"));",
-                            "Ext.getCmp(\"departureTimeList\").fireEvent(\"updateList\", record.get(\"value\"));"
+                            "Ext.getCmp(\"departureTimeList\").fireEvent(\"updateList\", record.get(\"id\"));"
                         ],
                         "name": "select",
                         "designer|userClassName": "onMylistSelect"
@@ -168,7 +168,7 @@
                 "designer|userClassName": "MyList1"
             },
             "customConfigs": [],
-            "expanded": false,
+            "expanded": true,
             "cn": [
                 {
                     "id": "ExtBox1-ext-gen6229",
@@ -241,9 +241,7 @@
                         "implHandler": [
                             "//Ext.getCmp(\"departureTimeList\").getStore().stationId = id;",
                             "Ext.getCmp(\"departureTimeList\").getStore().load({",
-                            "    params: {",
-                            "        id: id",
-                            "    }",
+                            "    url: '/departure-times/'+id",
                             "});"
                         ],
                         "name": "updateList",
