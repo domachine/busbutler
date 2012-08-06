@@ -20,10 +20,9 @@ Ext.define('MyApp.store.DepartureTimes', {
         storeId: 'departureTimes',
         proxy: {
             type: 'ajax',
-            url: '/fs-et/api.php',
             reader: {
                 type: 'json',
-                rootProperty: 'departures'
+                rootProperty: 'rows'
             }
         },
         fields: [
@@ -45,6 +44,12 @@ Ext.define('MyApp.store.DepartureTimes', {
             {
                 name: 'timetable'
             }
+        ],
+        listeners: [
+            {
+                fn: 'onJsonstoreLoad',
+                event: 'load'
+            }
         ]
     },
 
@@ -60,6 +65,15 @@ Ext.define('MyApp.store.DepartureTimes', {
 
     onAjaxproxyException: function(server, response, operation, options) {
         alert("Problem loading data, please retry.");
+    },
+
+    onJsonstoreLoad: function(store, records, successful, operation, eOpts) {
+        var response = JSON.parse(operation._response.responseText);
+        var lastUpdate = new Date(response.lastUpdate);
+        var lastUpdateString = lastUpdate.getHours() + ":" + lastUpdate.getMinutes();
+        Ext.getCmp("departureLabel").lastUpdate = lastUpdateString;
+        Ext.getCmp("departureLabel").setHtml(
+        Ext.getCmp("departureLabel").lastUpdate + " Uhr - " + Ext.getCmp("departureLabel").location);
     }
 
 });

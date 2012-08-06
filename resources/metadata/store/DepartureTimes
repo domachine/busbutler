@@ -24,7 +24,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "url": "/fs-et/api.php",
+                "url": null,
                 "designer|userClassName": "MyAjaxProxy"
             },
             "customConfigs": [],
@@ -39,7 +39,7 @@
                     },
                     "codeClass": null,
                     "userConfig": {
-                        "rootProperty": "departures",
+                        "rootProperty": "rows",
                         "totalProperty": null,
                         "designer|userClassName": "MyJsonReader"
                     },
@@ -153,6 +153,30 @@
             "userConfig": {
                 "name": "timetable",
                 "designer|userClassName": "MyField"
+            },
+            "customConfigs": [],
+            "expanded": true
+        },
+        {
+            "id": "ExtBox1-ext-gen7423",
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onJsonstoreLoad",
+                "implHandler": [
+                    "var response = JSON.parse(operation._response.responseText);",
+                    "var lastUpdate = new Date(response.lastUpdate);",
+                    "var lastUpdateString = lastUpdate.getHours() + \":\" + lastUpdate.getMinutes();",
+                    "Ext.getCmp(\"departureLabel\").lastUpdate = lastUpdateString;",
+                    "Ext.getCmp(\"departureLabel\").setHtml(",
+                    "    Ext.getCmp(\"departureLabel\").lastUpdate + \" Uhr - \" + Ext.getCmp(\"departureLabel\").location);"
+                ],
+                "name": "load",
+                "designer|userClassName": "onJsonstoreLoad"
             },
             "customConfigs": [],
             "expanded": true

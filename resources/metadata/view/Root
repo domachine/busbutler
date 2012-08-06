@@ -128,7 +128,9 @@
                         "fn": "onMylistSelect",
                         "implHandler": [
                             "Ext.getCmp(\"root\").fireEvent(\"changeList\", Ext.getCmp(\"departureTimeList\"));",
-                            "Ext.getCmp(\"departureTimeList\").fireEvent(\"updateList\", record.get(\"swuid\"));"
+                            "Ext.getCmp(\"departureTimeList\").fireEvent(\"updateList\", record.get(\"swuid\"));",
+                            "Ext.getCmp(\"departureLabel\").location = record.get(\"key\");",
+                            "Ext.getCmp(\"departureLabel\").setHtml(Ext.getCmp(\"departureLabel\").location);"
                         ],
                         "name": "select",
                         "designer|userClassName": "onMylistSelect"
@@ -213,7 +215,8 @@
                                         "fn": "onMybuttonTap",
                                         "implHandler": [
                                             "Ext.getCmp(\"stationList\").deselectAll();",
-                                            "Ext.getCmp(\"root\").fireEvent(\"changeList\", Ext.getCmp(\"stationList\"));"
+                                            "Ext.getCmp(\"root\").fireEvent(\"changeList\", Ext.getCmp(\"stationList\"));",
+                                            "Ext.getCmp(\"departureTimeList\").swuid = undefined;"
                                         ],
                                         "name": "tap",
                                         "designer|userClassName": "onMybuttonTap"
@@ -222,6 +225,23 @@
                                     "expanded": true
                                 }
                             ]
+                        },
+                        {
+                            "id": "ExtBox1-ext-gen5206",
+                            "type": "label",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "html": null,
+                                "id": "departureLabel",
+                                "designer|userClassName": "MyLabel",
+                                "layout|flex": 1
+                            },
+                            "customConfigs": [],
+                            "expanded": true
                         }
                     ]
                 },
@@ -239,42 +259,11 @@
                             "id"
                         ],
                         "implHandler": [
-                            "//Ext.getCmp(\"departureTimeList\").getStore().stationId = id;",
-                            "Ext.getCmp(\"departureTimeList\").getStore().load({",
-                            "    url: '/departure-times/'+id",
-                            "});"
+                            "Ext.getCmp(\"departureTimeList\").swuid = id;",
+                            "Ext.getCmp(\"root\").startReloadTask();"
                         ],
                         "name": "updateList",
                         "designer|userClassName": "onDepartureTimeListUpdateList"
-                    },
-                    "customConfigs": [],
-                    "expanded": true
-                },
-                {
-                    "id": "ExtBox1-ext-gen4834",
-                    "type": "basiceventbinding",
-                    "reference": {
-                        "name": "listeners",
-                        "type": "array"
-                    },
-                    "codeClass": null,
-                    "userConfig": {
-                        "fn": "onDepartureTimeListInitialize",
-                        "implHandler": [
-                            "/*var id = this.stationId;",
-                            "console.info(this);",
-                            "var reloadTask = Ext.create('Ext.util.DelayedTask', function() {",
-                            "    Ext.getCmp(\"departureTimeList\").getStore().load({",
-                            "        params: {",
-                            "            id: id",
-                            "        }",
-                            "    });",
-                            "    reloadTask.delay(10 * 1000);",
-                            "});",
-                            "reloadTask.delay(10 * 1000);*/"
-                        ],
-                        "name": "initialize",
-                        "designer|userClassName": "onDepartureTimeListInitialize"
                     },
                     "customConfigs": [],
                     "expanded": true
@@ -409,6 +398,38 @@
                 ],
                 "name": "geopositionChanged",
                 "designer|userClassName": "onRootGeopositionChangeD"
+            },
+            "customConfigs": [],
+            "expanded": true
+        },
+        {
+            "id": "ExtBox1-ext-gen16266",
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "startReloadTask",
+                "implHandler": [
+                    "var id = Ext.getCmp(\"departureTimeList\").swuid;",
+                    "Ext.getCmp(\"departureTimeList\").getStore().load({",
+                    "    url: '/departure-times/' + id",
+                    "});",
+                    "",
+                    "var intervall = setInterval(function(){",
+                    "    id = Ext.getCmp(\"departureTimeList\").swuid;",
+                    "    console.info(id);",
+                    "    if(id === null || id === undefined)",
+                    "        clearInterval(intervall);",
+                    "    else",
+                    "        Ext.getCmp(\"departureTimeList\").getStore().load({",
+                    "            url: '/departure-times/' + id",
+                    "        });",
+                    "}, 20 * 1000);"
+                ],
+                "designer|userClassName": "startReloadTask"
             },
             "customConfigs": [],
             "expanded": true

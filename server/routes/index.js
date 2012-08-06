@@ -21,13 +21,13 @@ exports.departureTimes = function(req, res){
         }
         var now = Number(new Date());
         if(now - doc.lastUpdate <= 45 * 1000)
-            res.end(JSON.stringify(doc.departures));
+            res.end(JSON.stringify({rows: doc.departures, lastUpdate: doc.lastUpdate}));
         else
             core.update(doc, function(err, doc){
                 if (err)
                     res.end(JSON.stringify(err));
                 else
-                    res.end(JSON.stringify(doc.departures));
+                    res.end(JSON.stringify({rows: doc.departures, lastUpdate: now}));
             }, req.nano);
     });
 };

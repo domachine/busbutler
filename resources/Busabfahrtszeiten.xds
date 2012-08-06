@@ -1,7 +1,7 @@
 {
     "name": "Busabfahrtszeiten",
     "settings": {
-        "urlPrefix": "http://localhost:8080",
+        "urlPrefix": "http://localhost:3000/",
         "spacesToIndent": 4,
         "codeGenFormat": "Class",
         "exportPath": "/home/lukas/Documents/uni/busbutler/server/public",

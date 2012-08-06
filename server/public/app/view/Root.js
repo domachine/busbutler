@@ -64,26 +64,13 @@ Ext.define('MyApp.view.Root', {
                                 xtype: 'button',
                                 itemId: 'mybutton',
                                 text: 'zur Übersicht'
+                            },
+                            {
+                                xtype: 'label',
+                                id: 'departureLabel',
+                                flex: 1
                             }
                         ]
-                    }
-                ],
-                listeners: [
-                    {
-                        fn: function(component, options) {
-                            /*var id = this.stationId;
-                            console.info(this);
-                            var reloadTask = Ext.create('Ext.util.DelayedTask', function() {
-                            Ext.getCmp("departureTimeList").getStore().load({
-                            params: {
-                            id: id
-                            }
-                            });
-                            reloadTask.delay(10 * 1000);
-                            });
-                            reloadTask.delay(10 * 1000);*/
-                        },
-                        event: 'initialize'
                     }
                 ]
             }
@@ -146,18 +133,19 @@ Ext.define('MyApp.view.Root', {
     onMylistSelect: function(dataview, record, options) {
         Ext.getCmp("root").fireEvent("changeList", Ext.getCmp("departureTimeList"));
         Ext.getCmp("departureTimeList").fireEvent("updateList", record.get("swuid"));
+        Ext.getCmp("departureLabel").location = record.get("key");
+        Ext.getCmp("departureLabel").setHtml(Ext.getCmp("departureLabel").location);
     },
 
     onMybuttonTap: function(button, e, options) {
         Ext.getCmp("stationList").deselectAll();
         Ext.getCmp("root").fireEvent("changeList", Ext.getCmp("stationList"));
+        Ext.getCmp("departureTimeList").swuid = undefined;
     },
 
     onDepartureTimeListUpdateList: function(id) {
-        //Ext.getCmp("departureTimeList").getStore().stationId = id;
-        Ext.getCmp("departureTimeList").getStore().load({
-            url: '/departure-times/'+id
-        });
+        Ext.getCmp("departureTimeList").swuid = id;
+        Ext.getCmp("root").startReloadTask();
     },
 
     onRootChangeList: function(card) {
@@ -224,6 +212,24 @@ Ext.define('MyApp.view.Root', {
             return key;
         }
         );
+    },
+
+    startReloadTask: function() {
+        var id = Ext.getCmp("departureTimeList").swuid;
+        Ext.getCmp("departureTimeList").getStore().load({
+            url: '/departure-times/' + id
+        });
+
+        var intervall = setInterval(function(){
+            id = Ext.getCmp("departureTimeList").swuid;
+            console.info(id);
+            if(id === null || id === undefined)
+            clearInterval(intervall);
+            else
+            Ext.getCmp("departureTimeList").getStore().load({
+                url: '/departure-times/' + id
+            });
+        }, 20 * 1000);
     }
 
 });
