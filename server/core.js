@@ -9,7 +9,7 @@ exports.update = function (doc, callback, nano) {
               ['http://code.jquery.com/jquery.min.js'],
               function (error, win) {
                   if (error) {
-                      console.log(error);
+                      callback(error, undefined);
                       return;
                   }
                   var $ = win.$;
@@ -44,7 +44,7 @@ exports.update = function (doc, callback, nano) {
                   doc.departures = deps;
                   doc.lastUpdate =
                       Number(new Date($('itdRequest').attr('now') + '+0200'));
-                  callback(doc);
+                  callback(undefined, doc);
                   nano.bulk({docs: [doc]}, function (err) {
                       if (err) {
                           console.log('Error occured:');
