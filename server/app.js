@@ -32,7 +32,7 @@ app.configure(function(){
     app.use(express.bodyParser());
     app.use(express.methodOverride());
     app.use(function (req, res, next) {
-        req.db = nano;
+        req.nano = db;
         next();
     });
     app.use(app.router);
