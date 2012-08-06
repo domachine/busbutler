@@ -145,7 +145,7 @@ Ext.define('MyApp.view.Root', {
 
     onMylistSelect: function(dataview, record, options) {
         Ext.getCmp("root").fireEvent("changeList", Ext.getCmp("departureTimeList"));
-        Ext.getCmp("departureTimeList").fireEvent("updateList", record.get("id"));
+        Ext.getCmp("departureTimeList").fireEvent("updateList", record.get("swuid"));
     },
 
     onMybuttonTap: function(button, e, options) {
@@ -201,7 +201,7 @@ Ext.define('MyApp.view.Root', {
                 var stationModel = stationsStore.getModel();
                 for(var i = 0; i < text.rows.length ; i++){
                     var station = new stationModel();
-                    station.set("id", "fuu"+text.rows[i].id);
+                    station.set("swuid", text.rows[i].id);
                     station.set("key", text.rows[i].location);
                     station.set("value", text.rows[i].oldid);
                     station.set("group", "1. Nächste Stationen");

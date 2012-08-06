@@ -42,6 +42,7 @@
                     },
                     "codeClass": null,
                     "userConfig": {
+                        "idProperty": "none",
                         "rootProperty": "rows",
                         "totalProperty": "total_rows",
                         "designer|userClassName": "MyJsonReader"
@@ -60,7 +61,8 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "id",
+                "mapping": "id",
+                "name": "swuid",
                 "designer|userClassName": "MyField"
             },
             "customConfigs": [],

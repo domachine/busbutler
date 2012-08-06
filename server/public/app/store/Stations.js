@@ -25,13 +25,15 @@ Ext.define('MyApp.store.Stations', {
             url: '/allByName',
             reader: {
                 type: 'json',
+                idProperty: 'none',
                 rootProperty: 'rows',
                 totalProperty: 'total_rows'
             }
         },
         fields: [
             {
-                name: 'id'
+                mapping: 'id',
+                name: 'swuid'
             },
             {
                 name: 'key'

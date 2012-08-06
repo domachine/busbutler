@@ -12,6 +12,14 @@ exports.departureTimes = function(req, res){
     var id = req.params.id;
     console.log(id);
     req.nano.get(id, function(err, doc){
+        if (err){
+            res.end(JSON.stringify(err));
+            return;
+        }
+        if (doc === undefined){
+            res.end(JSON.stringify("Keine Daten verfügbar."));
+            return;
+        }
         var now = Number(new Date());
         console.log(doc.lastUpdate);
         if(doc.lastUpdate <= now-60)
