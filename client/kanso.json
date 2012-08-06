@@ -3,11 +3,11 @@
     "version": "0.0.1",
     "description": "...",
     "modules": ["lib"],
-    "load": "lib/app",
-    "attachments": ["app", "app.js", "index.html"],
+    "load": "kanso-lib/app",
+    // "attachments": ["app", "app.js", "index.html"],
     "dependencies": {
         "properties": null,
-        "modules": null,
-        "attachments": null
+        "modules": null
+        // "attachments": null
     }
 }
