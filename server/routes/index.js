@@ -32,5 +32,5 @@ exports.allByName = function(req, res){
 };
 
 exports.allByCoords = function(req, res){
-    req.nano.list("view", "allByCoords", "next", req.params).pipe(res);
+    req.nano.list("view", "next", "allByCoords", req.query).pipe(res);
 };

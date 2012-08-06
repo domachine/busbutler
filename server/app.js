@@ -15,12 +15,13 @@ var app = express();
 
 var db = nano.use('haltestellen');
 
-db.list = function (designname, listname, viewname, callback) {
+db.list = function (designname, listname, viewname, params) {
     var docpath = '_design/' + designname + '/_list/' +
             listname + '/' + viewname;
-    nano.request({db: 'haltestellen',
-                  doc: docpath,
-                  method: 'GET'}, callback);
+    return nano.request({db: 'haltestellen',
+                         doc: docpath,
+                         method: 'GET',
+                         params: params});
 };
 
 app.configure(function(){
