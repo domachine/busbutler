@@ -9,7 +9,7 @@ exports.index = function(req, res){
 };
 
 exports.departureTimes = function(req, res){
-    var id = 'swu-' + req.params.id;
+    var id = req.params.id;
     console.log(id);
     req.nano.get(id, function(err, doc){
         var now = Number(new Date());
