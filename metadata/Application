@@ -1,0 +1,24 @@
+{
+    "id": "ExtBox1-ext-gen3110",
+    "type": "application",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "stores": [
+            "Stations",
+            "DepartureTimes"
+        ],
+        "views": [
+            "Root"
+        ],
+        "name": "MyApp"
+    },
+    "customConfigs": [],
+    "designerId": "application",
+    "$viewOrder": 0,
+    "iconCls": "icon-application",
+    "expanded": true
+}
