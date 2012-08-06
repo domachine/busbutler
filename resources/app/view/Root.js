@@ -194,7 +194,6 @@ Ext.define('MyApp.view.Root', {
         var url = "/allByCoords?coords=" + JSON.stringify([opts.longitude, opts.latitude]);
         Ext.Ajax.request({
             url: url,
-            headers: { 'Content-Type': 'application/json' },
             success: function(response){
                 var text = JSON.parse(response.responseText);
                 var stationsStore = Ext.getCmp("stationList").getStore();
