@@ -27,7 +27,7 @@
             "codeClass": null,
             "userConfig": {
                 "groupParam": null,
-                "url": "/haltestellen/_design/view/_view/allByName",
+                "url": "/allByName",
                 "designer|userClassName": "MyAjaxProxy"
             },
             "customConfigs": [],
