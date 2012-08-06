@@ -10,7 +10,6 @@ exports.index = function(req, res){
 
 exports.departureTimes = function(req, res){
     var id = req.params.id;
-    console.log(id);
     req.nano.get(id, function(err, doc){
         if (err){
             res.end(JSON.stringify(err));
@@ -25,7 +24,6 @@ exports.departureTimes = function(req, res){
             res.end(JSON.stringify(doc.departures));
         else
             core.update(doc, function(err, doc){
-                console.log('Update ...');
                 if (err)
                     res.end(JSON.stringify(err));
                 else
