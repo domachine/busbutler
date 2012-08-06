@@ -34,6 +34,8 @@ app.configure('development', function(){
 });
 
 app.get('/departure-times/:id', routes.departureTimes);
+app.get('/allByName', routes.allByName);
+app.get('/allByCoords', routes.allByCoords);
 app.get('/', routes.index);
 
 http.createServer(app).listen(app.get('port'), function(){

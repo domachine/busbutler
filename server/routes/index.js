@@ -26,3 +26,11 @@ exports.departureTimes = function(req, res){
             }, req.nano);
     });
 };
+
+exports.allByName = function(req, res){
+    req.nano.view("view", "allByName", {}).pipe(res);
+}
+
+exports.allByCoords = function(req, res){
+    req.nano.list("view", "allByCoords", "next", req.params).pipe(res);
+}
