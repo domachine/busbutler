@@ -1,7 +1,6 @@
-var jsdom = require('jsdom'),
-    nano = require('nano')('http://localhost:5984/haltestellen');
+var jsdom = require('jsdom');
 
-exports.update = function (doc, callback) {
+exports.update = function (doc, callback, nano) {
     var id = doc._id.substring(4);
     jsdom.env('http://www.ding.eu/ding2/XML_DM_REQUEST?' +
               'laguage=de&typeInfo_dm=stopID&' +
