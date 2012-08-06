@@ -8,10 +8,20 @@ var express = require('express'),
     http = require('http'),
     path = require('path'),
     jsdom = require('jsdom'),
-    nano = require('nano')('http://localhost:5984/haltestellen'),
+    nano = require('nano')('http://localhost:5984'),
     core = require('./core');
 
 var app = express();
+
+var db = nano.use('haltestellen');
+
+db.list = function (designname, listname, viewname, callback) {
+    var docpath = '_design/' + designname + '/_list/' +
+            listname + '/' + viewname;
+    nano.request({db: 'haltestellen',
+                  doc: docpath,
+                  method: 'GET'}, callback);
+};
 
 app.configure(function(){
     app.set('port', process.env.PORT || 3000);
@@ -22,7 +32,7 @@ app.configure(function(){
     app.use(express.bodyParser());
     app.use(express.methodOverride());
     app.use(function (req, res, next) {
-        req.nano = nano;
+        req.db = nano;
         next();
     });
     app.use(app.router);
