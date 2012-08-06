@@ -141,7 +141,7 @@
                         ],
                         "implHandler": [
                             "if(record.get(\"group\") !== undefined)",
-                            "return record.get(\"group\");",
+                            "   return record.get(\"group\");",
                             "return record.get(\"key\").split(\" / \")[0];"
                         ],
                         "designer|userClassName": "groupFn"

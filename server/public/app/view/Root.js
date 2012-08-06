@@ -218,8 +218,8 @@ Ext.define('MyApp.view.Root', {
         var search = Ext.getCmp("mysearchfield").getValue().split(" ");
         Ext.getCmp("stationList").getStore().clearFilter();
         Ext.getCmp("stationList").getStore().filterBy(
-        function(records){
-            var key = records.get("key");
+        function(record){
+            var key = record.get("key");
             for(var i in search){
                 if(key.toLowerCase().indexOf(search[i].toLowerCase()) === -1)
                 return;

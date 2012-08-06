@@ -4,7 +4,7 @@
         "urlPrefix": "http://localhost:8080",
         "spacesToIndent": 4,
         "codeGenFormat": "Class",
-        "exportPath": "./",
+        "exportPath": "/home/lukas/Documents/uni/busbutler/server/public",
         "extPath": "http://extjs.cachefly.net/touch/sencha-touch-2.0.1/",
         "senchaIoKey": "",
         "senchaIoPath": "http://extjs.cachefly.net/designer/IO/",

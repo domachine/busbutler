@@ -168,7 +168,7 @@
                 "designer|userClassName": "MyList1"
             },
             "customConfigs": [],
-            "expanded": true,
+            "expanded": false,
             "cn": [
                 {
                     "id": "ExtBox1-ext-gen6229",
@@ -324,14 +324,14 @@
                     "var search = Ext.getCmp(\"mysearchfield\").getValue().split(\" \");",
                     "Ext.getCmp(\"stationList\").getStore().clearFilter();",
                     "Ext.getCmp(\"stationList\").getStore().filterBy(",
-                    "    function(records){",
-                    "        var key = records.get(\"key\");",
-                    "        for(var i in search){",
-                    "            if(key.toLowerCase().indexOf(search[i].toLowerCase()) === -1)",
-                    "                return;",
-                    "        }",
-                    "        return key;",
+                    "function(record){",
+                    "    var key = record.get(\"key\");",
+                    "    for(var i in search){",
+                    "        if(key.toLowerCase().indexOf(search[i].toLowerCase()) === -1)",
+                    "        return;",
                     "    }",
+                    "    return key;",
+                    "}",
                     ");"
                 ],
                 "designer|userClassName": "executeSearch"
