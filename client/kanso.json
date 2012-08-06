@@ -2,12 +2,10 @@
     "name": "view",
     "version": "0.0.1",
     "description": "...",
-    "modules": ["lib"],
+    "modules": ["kanso-lib"],
     "load": "kanso-lib/app",
-    // "attachments": ["app", "app.js", "index.html"],
     "dependencies": {
         "properties": null,
         "modules": null
-        // "attachments": null
     }
 }
