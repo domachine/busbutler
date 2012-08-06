@@ -3,13 +3,13 @@
  * Module dependencies.
  */
 
-var express = require('express')
-  , routes = require('./routes')
-  , http = require('http')
-  , path = require('path')
-  , jsdom = require('jsdom')
-  , nano = require('nano')('http://localhost:5984/haltestellen');
-;
+var express = require('express'),
+    routes = require('./routes'),
+    http = require('http'),
+    path = require('path'),
+    jsdom = require('jsdom'),
+    nano = require('nano')('http://localhost:5984/haltestellen'),
+    core = require('./core');
 
 var app = express();
 
