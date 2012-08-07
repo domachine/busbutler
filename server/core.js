@@ -6,7 +6,6 @@ function parseXML (doc, callback, nano, err, res, xml) {
     var $ = libxml.parseXmlString(xml);
     var deps = [];
     $.find('//itdDepartureList/itdDeparture').forEach(function (child) {
-        console.log(child.attrs());
         var departure = {
             platform: child.attr('platform').value(),
             stopID: child.attr('stopID').value(),
@@ -37,7 +36,8 @@ function parseXML (doc, callback, nano, err, res, xml) {
     });
     doc.departures = deps;
     doc.lastUpdate =
-        Number(new Date($.find('//itdRequest')[0].attr('now') + '+0200'));
+        Number(new Date($.find('//itdRequest')[0].attr('now').value()
+                        + '+0200'));
     callback(null, doc);
     nano.bulk({docs: [doc]}, function (err) {
         if (err) {
