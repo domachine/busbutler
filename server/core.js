@@ -3,8 +3,6 @@ var request = require('request');
 var libxml = require('libxmljs');
 
 function parseXML (doc, callback, nano, err, res, xml) {
-    var id = doc._id.substring(4);
-
     var $ = libxml.parseXmlString(xml);
     var deps = [];
     $.find('//itdDepartureList/itdDeparture').forEach(function (child) {
@@ -65,9 +63,3 @@ exports.update = function (doc, callback, nano) {
                     parseXML(doc, callback, nano, err, res, xml);
             });
 };
-
-// nano.get('_all_docs', {include_docs: true}, function (err, res) {
-//     res.rows.forEach(function (row) {
-//         update(row.doc);
-//     });
-// });
