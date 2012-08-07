@@ -1,4 +1,3 @@
-var jsdom = require('jsdom');
 var request = require('request');
 var libxml = require('libxmljs');
 

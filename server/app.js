@@ -7,7 +7,6 @@ var express = require('express'),
     routes = require('./routes/index'),
     http = require('http'),
     path = require('path'),
-    jsdom = require('jsdom'),
     nano = require('nano')('http://localhost:5984'),
     core = require('./core');
 
