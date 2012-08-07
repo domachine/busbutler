@@ -29,7 +29,7 @@ exports.departureTimes = function(req, res){
 };
 
 exports.allByName = function(req, res){
-    req.nano.view("view", "allByName", {}).pipe(res);
+    req.nano.view("view", "allByName", req.query).pipe(res);
 };
 
 exports.allByCoords = function(req, res){
