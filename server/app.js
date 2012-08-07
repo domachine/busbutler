@@ -49,7 +49,6 @@ app.configure('development', function(){
 app.get('/departure-times/:id', routes.departureTimes);
 app.get('/allByName', routes.allByName);
 app.get('/allByCoords', routes.allByCoords);
-app.get('/', routes.index);
 
 var options = {
     daemonFile: "log/server.dmn",

@@ -4,10 +4,6 @@ var core = require('../core');
  * GET home page.
  */
 
-exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
-};
-
 exports.departureTimes = function(req, res){
     var id = req.params.id;
     req.nano.get(id, function(err, doc){
