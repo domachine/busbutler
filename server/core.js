@@ -12,19 +12,19 @@ function parseXML (doc, callback, nano, err, res, xml) {
             countdown: child.attr('countdown').value(),
             isRealTime: true
         };
-        var servLine = child.find('//itdServingLine')[0];
+        var servLine = child.find('itdServingLine')[0];
         departure.direction = servLine.attr('direction').value();
         departure.realtime = servLine.attr('realtime').value();
         departure.line = servLine.attr('number').value();
-        var dateTime = child.find('//itdRTDateTime');
+        var dateTime = child.find('itdRTDateTime');
         if (dateTime.length === 0) {
             departure.isRealTime = false;
-            dateTime = child.find('//itdDateTime')[0];
+            dateTime = child.find('itdDateTime')[0];
         }
         else
             dateTime = dateTime[0];
-        var date = dateTime.find('//itdDate')[0];
-        var time = dateTime.find('//itdTime')[0];
+        var date = dateTime.find('itdDate')[0];
+        var time = dateTime.find('itdTime')[0];
         departure.dateTime = new Date(Number(date.attr('year').value()),
                                       Number(date.attr('month').value()),
                                       Number(date.attr('day').value()),
