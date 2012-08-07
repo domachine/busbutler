@@ -8,12 +8,15 @@ var express = require('express'),
     http = require('http'),
     path = require('path'),
     jsdom = require('jsdom'),
+    startStopDaemon = require('start-stop-daemon'),
     nano = require('nano')('http://localhost:5984'),
     core = require('./core');
 
 var app = express();
 
 var db = nano.use('haltestellen');
+
+var server;
 
 db.list = function (designname, listname, viewname, params) {
     var docpath = '_design/' + designname + '/_list/' +
@@ -49,6 +52,20 @@ app.get('/allByName', routes.allByName);
 app.get('/allByCoords', routes.allByCoords);
 app.get('/', routes.index);
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log("Express server listening on port " + app.get('port'));
+var options = {
+    daemonFile: "log/server.dmn",
+    outFile: "log/server.out",
+    errFile: "log/server.err",
+    onCrash: function(e){
+        console.info("server crashed! Closing httpserver and restarting expressjs now ...", e);
+        server.close();
+        this.crashRestart();
+    }
+};
+
+startStopDaemon(options, function() {
+    server = http.createServer(app);
+    server.listen(app.get('port'), function(){
+        console.log("Express server listening on port " + app.get('port'));
+    });
 });
